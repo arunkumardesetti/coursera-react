@@ -151,7 +151,7 @@ class Contact extends Component {
                                         show="touched"
                                         messages={{
                                             required: 'Required',
-                                            validEmail: '-A Valid Email Address'
+                                            validEmail: 'InValid Email Address'
                                         }}
                                      />
                                 </Col>
@@ -170,7 +170,7 @@ class Contact extends Component {
                                 <Col md={{size: 3, offset: 1}}>
                                     <Control.select model=".contactType" name="contactType"
                                         className="form-control">
-                                        <option>Tel.</option>
+                                        <option >Tel.</option>
                                         <option>Email</option>
                                     </Control.select>
                                 </Col>
