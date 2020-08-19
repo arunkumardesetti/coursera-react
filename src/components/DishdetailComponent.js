@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import { Card, CardImg, CardBody,CardText, Button, Modal, ModalHeader, ModalBody, Label, Row, Col, CardTitle, Breadcrumb, BreadcrumbItem } from "reactstrap";
 import { Link } from 'react-router-dom';
 import { Control, LocalForm, Errors } from 'react-redux-form';
+import { Loading } from './LoadingComponent';
+
 function RenderDish({dish}) {
     if (dish != null) {
         return(
@@ -56,6 +58,25 @@ function RenderComments({comments, addComment, dishId}) {
 }
 const Dishdetail = (props) => {
     //console.log(props.comments);
+    if (props.isLoading) {
+        return(
+            <div className="container">
+                <div className="row">            
+                    <Loading />
+                </div>
+            </div>
+        );
+    }
+    else if (props.errMess) {
+        return(
+            <div className="container">
+                <div className="row">            
+                    <h4>{props.errMess}</h4>
+                </div>
+            </div>
+        );
+    }
+    else if (props.dish != null) 
     return (
         <div className="container">
         <div className="row">
@@ -148,11 +169,11 @@ class CommentForm extends Component {
                                 </Col>
                             </Row>
                             <Row className="form-group">
-                                <Label htmlFor="feedback" md={12}>Your feedback</Label>
+                                <Label htmlFor="feedback" md={12}>Comment</Label>
                                 <Col md={12}>
-                                <Control.text model=".comment" id="comment" name="comment" 
+                                <Control.textarea model=".comment" id="comment" name="comment" 
                                     resize="none"
-                                    rows="12" 
+                                    rows="6" 
                                     className="form-control" 
                                     validators={{
                                         required,
